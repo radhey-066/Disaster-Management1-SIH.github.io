@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Disaster Management AI System for India</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">Advanced Disaster Management AI System for India</h1>
+                <div class="status-bar">
+                    <div class="status-item">
+                        <span class="status-label">System Status:</span>
+                        <span class="status-value status--success">Online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Active Alerts:</span>
+                        <span class="status-value" id="activeAlerts">2</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Risk Level:</span>
+                        <span class="status-value status--warning" id="riskLevel">Moderate</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Last Update:</span>
+                        <span class="status-value" id="lastUpdate">Just now</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="navigation">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="dashboard">AI Dashboard</button>
+                <button class="nav-tab" data-tab="risk-analysis">Risk Analysis</button>
+                <button class="nav-tab" data-tab="predictions">Predictions</button>
+                <button class="nav-tab" data-tab="response">Response Center</button>
+                <button class="nav-tab" data-tab="resources">Smart Resources</button>
+                <button class="nav-tab" data-tab="recovery">Recovery AI</button>
+                <button class="nav-tab" data-tab="analytics">Analytics</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- AI Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <div class="dashboard-grid">
+                    <!-- Real-time Monitoring Widgets -->
+                    <div class="widget-section">
+                        <h2 class="section-title">Real-time Monitoring</h2>
+                        <div class="widgets-grid">
+                            <div class="widget card">
+                                <div class="widget-header">
+                                    <span class="widget-icon">🌍</span>
+                                    <h3>Seismic Activity</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="metric-value" id="seismicValue">4.2</div>
+                                    <div class="metric-label">Magnitude</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="seismicProgress" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget card">
+                                <div class="widget-header">
+                                    <span class="widget-icon">☀️</span>
+                                    <h3>Weather Risk Index</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="metric-value" id="weatherValue">75</div>
+                                    <div class="metric-label">Index Score</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill warning" id="weatherProgress" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget card">
+                                <div class="widget-header">
+                                    <span class="widget-icon">👥</span>
+                                    <h3>Population at Risk</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="metric-value" id="populationValue">12,500</div>
+                                    <div class="metric-label">People</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill error" id="populationProgress" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget card">
+                                <div class="widget-header">
+                                    <span class="widget-icon">⚡</span>
+                                    <h3>Response Time</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="metric-value" id="responseValue">3.8</div>
+                                    <div class="metric-label">Minutes</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill success" id="responseProgress" style="width: 76%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Insights Panel -->
+                    <div class="insights-section">
+                        <h2 class="section-title">AI Insights</h2>
+                        <div class="insights-grid">
+                            <div class="insight-card card">
+                                <h3>🌊 Flood Prediction</h3>
+                                <p>Mumbai shows 85% probability of flooding in next 48 hours due to monsoon intensity.</p>
+                                <div class="confidence-score">Confidence: 92%</div>
+                            </div>
+                            <div class="insight-card card">
+                                <h3>📊 Resource Optimization</h3>
+                                <p>AI suggests redeploying 15 rescue teams from Delhi to Chennai for cyclone response.</p>
+                                <div class="confidence-score">Efficiency Gain: 34%</div>
+                            </div>
+                            <div class="insight-card card">
+                                <h3>🎯 Population Analysis</h3>
+                                <p>High-density areas in Kolkata require immediate evacuation protocols activation.</p>
+                                <div class="confidence-score">Priority: Critical</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map Section -->
+                    <div class="map-section">
+                        <h2 class="section-title">Interactive Risk Map</h2>
+                        <div class="map-container card">
+                            <div class="map-controls">
+                                <button class="btn btn--sm" id="refreshData">🔄 Refresh Data</button>
+                                <button class="btn btn--sm" id="toggleLayers">🗂️ Toggle Layers</button>
+                                <div class="map-loading hidden" id="mapLoading">Loading map...</div>
+                            </div>
+                            <div id="interactiveMap" style="height: 500px; width: 100%; border-radius: var(--radius-lg);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Analysis Tab -->
+            <div class="tab-content" id="risk-analysis">
+                <div class="risk-analysis-container">
+                    <h2 class="section-title">Comprehensive Risk Assessment</h2>
+                    <div class="analysis-layout">
+                        <div class="analysis-form card">
+                            <h3>Input Parameters</h3>
+                            <form id="riskAnalysisForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Geographic Coordinates</label>
+                                        <select class="form-control" id="citySelect">
+                                            <option value="19.0760,72.8777">Mumbai (19.0760, 72.8777)</option>
+                                            <option value="28.6139,77.2090">Delhi (28.6139, 77.2090)</option>
+                                            <option value="13.0827,80.2707">Chennai (13.0827, 80.2707)</option>
+                                            <option value="22.5726,88.3639">Kolkata (22.5726, 88.3639)</option>
+                                            <option value="12.9716,77.5946">Bangalore (12.9716, 77.5946)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Hazard Type</label>
+                                        <select class="form-control" id="hazardType">
+                                            <option value="earthquake">🌍 Earthquake</option>
+                                            <option value="flood">🌊 Flood</option>
+                                            <option value="cyclone">🌀 Cyclone</option>
+                                            <option value="wildfire">🔥 Wildfire</option>
+                                            <option value="tsunami">🌊 Tsunami</option>
+                                            <option value="landslide">⛰ Landslide</option>
+                                            <option value="drought">🌵 Drought</option>
+                                            <option value="volcanic">🌋 Volcanic</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Population Density (per km²)</label>
+                                        <input type="number" class="form-control" id="populationDensity" value="25000" min="100" max="100000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Infrastructure Age (years)</label>
+                                        <input type="number" class="form-control" id="infrastructureAge" value="35" min="1" max="100">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Building Standards Score (1-10)</label>
+                                        <input type="range" class="form-control" id="buildingStandards" min="1" max="10" value="7">
+                                        <span id="buildingStandardsValue">7</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Economic Index (1-100)</label>
+                                        <input type="range" class="form-control" id="economicIndex" min="1" max="100" value="65">
+                                        <span id="economicIndexValue">65</span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Response Capacity</label>
+                                        <select class="form-control" id="responseCapacity">
+                                            <option value="low">Low</option>
+                                            <option value="medium" selected>Medium</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Historical Frequency (per decade)</label>
+                                        <input type="number" class="form-control" id="historicalFrequency" value="3" min="0" max="20">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width" id="analyzeBtn">
+                                    <span id="analyzeText">🧠 Run AI Analysis</span>
+                                    <span id="analyzeLoading" class="hidden">⏳ Analyzing...</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="analysis-results card">
+                            <h3>AI Risk Assessment Results</h3>
+                            <div id="resultsContent" class="results-content">
+                                <div class="no-results">
+                                    <p>Click "Run AI Analysis" to generate comprehensive risk assessment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predictions Tab -->
+            <div class="tab-content" id="predictions">
+                <div class="predictions-container">
+                    <h2 class="section-title">Disaster Prediction System</h2>
+                    <div class="predictions-grid">
+                        <div class="prediction-card card">
+                            <h3>🌊 Flood Predictions</h3>
+                            <div class="prediction-item">
+                                <span class="location">Mumbai</span>
+                                <span class="probability high">85%</span>
+                                <span class="timeframe">Next 48 hours</span>
+                            </div>
+                            <div class="prediction-item">
+                                <span class="location">Kolkata</span>
+                                <span class="probability medium">62%</span>
+                                <span class="timeframe">Next 72 hours</span>
+                            </div>
+                        </div>
+
+                        <div class="prediction-card card">
+                            <h3>🌀 Cyclone Predictions</h3>
+                            <div class="prediction-item">
+                                <span class="location">Chennai</span>
+                                <span class="probability high">78%</span>
+                                <span class="timeframe">Next 5 days</span>
+                            </div>
+                            <div class="prediction-item">
+                                <span class="location">Visakhapatnam</span>
+                                <span class="probability medium">45%</span>
+                                <span class="timeframe">Next 7 days</span>
+                            </div>
+                        </div>
+
+                        <div class="prediction-card card">
+                            <h3>🌍 Earthquake Predictions</h3>
+                            <div class="prediction-item">
+                                <span class="location">Delhi</span>
+                                <span class="probability low">23%</span>
+                                <span class="timeframe">Next 30 days</span>
+                            </div>
+                            <div class="prediction-item">
+                                <span class="location">Shimla</span>
+                                <span class="probability medium">41%</span>
+                                <span class="timeframe">Next 30 days</span>
+                            </div>
+                        </div>
+
+                        <div class="seasonal-analysis card">
+                            <h3>📊 Seasonal Risk Analysis</h3>
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="seasonalChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="early-warning card">
+                            <h3>⚠️ Early Warning System</h3>
+                            <div class="warning-alerts">
+                                <div class="alert alert--warning">
+                                    <strong>Monsoon Alert:</strong> Heavy rainfall expected in Western Ghats region
+                                </div>
+                                <div class="alert alert--info">
+                                    <strong>Temperature Alert:</strong> Heat wave conditions likely in Rajasthan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Center Tab -->
+            <div class="tab-content" id="response">
+                <div class="response-center">
+                    <h2 class="section-title">Emergency Response Center</h2>
+                    <div class="response-layout">
+                        <div class="alert-creation card">
+                            <h3>Create Emergency Alert</h3>
+                            <form id="alertForm">
+                                <div class="form-group">
+                                    <label class="form-label">Alert Type</label>
+                                    <select class="form-control" id="alertType">
+                                        <option value="warning">⚠️ Warning</option>
+                                        <option value="watch">👀 Watch</option>
+                                        <option value="advisory">ℹ️ Advisory</option>
+                                        <option value="emergency">🚨 Emergency</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Affected Area</label>
+                                    <select class="form-control" id="affectedArea">
+                                        <option value="mumbai">Mumbai</option>
+                                        <option value="delhi">Delhi</option>
+                                        <option value="chennai">Chennai</option>
+                                        <option value="kolkata">Kolkata</option>
+                                        <option value="bangalore">Bangalore</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control" id="alertMessage" rows="4" placeholder="Enter alert message..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn--primary">📢 Send Alert</button>
+                            </form>
+                        </div>
+
+                        <div class="communication-center card">
+                            <h3>Two-way Communication</h3>
+                            <div class="comm-messages" id="commMessages">
+                                <div class="message incoming">
+                                    <span class="sender">Mumbai Control</span>
+                                    <span class="content">Evacuation proceeding as planned. 2,500 people relocated.</span>
+                                    <span class="timestamp">2 min ago</span>
+                                </div>
+                                <div class="message outgoing">
+                                    <span class="sender">Central Command</span>
+                                    <span class="content">Roger. Additional medical teams dispatched to sector 7.</span>
+                                    <span class="timestamp">1 min ago</span>
+                                </div>
+                            </div>
+                            <div class="message-input">
+                                <input type="text" class="form-control" id="messageInput" placeholder="Type your message...">
+                                <button class="btn btn--primary" id="sendMessage">Send</button>
+                            </div>
+                        </div>
+
+                        <div class="coordination-dashboard card">
+                            <h3>Real-time Coordination</h3>
+                            <div class="coordination-grid">
+                                <div class="coord-item">
+                                    <span class="coord-label">Active Teams</span>
+                                    <span class="coord-value">47</span>
+                                </div>
+                                <div class="coord-item">
+                                    <span class="coord-label">Evacuated</span>
+                                    <span class="coord-value">12,456</span>
+                                </div>
+                                <div class="coord-item">
+                                    <span class="coord-label">Shelters Open</span>
+                                    <span class="coord-value">23</span>
+                                </div>
+                                <div class="coord-item">
+                                    <span class="coord-label">Response Time</span>
+                                    <span class="coord-value">3.2 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Resources Tab -->
+            <div class="tab-content" id="resources">
+                <div class="resources-container">
+                    <h2 class="section-title">Smart Resource Management</h2>
+                    <div class="resources-grid">
+                        <div class="resource-inventory card">
+                            <h3>Resource Inventory</h3>
+                            <div class="resource-list">
+                                <div class="resource-item">
+                                    <span class="resource-name">🚑 Medical Teams</span>
+                                    <span class="resource-count">25 units</span>
+                                    <div class="availability-bar">
+                                        <div class="availability-fill" style="width: 80%"></div>
+                                    </div>
+                                    <span class="availability-text">80% Available</span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-name">🚗 Rescue Vehicles</span>
+                                    <span class="resource-count">45 units</span>
+                                    <div class="availability-bar">
+                                        <div class="availability-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="availability-text">90% Available</span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-name">🏠 Emergency Shelters</span>
+                                    <span class="resource-count">120 units</span>
+                                    <div class="availability-bar">
+                                        <div class="availability-fill" style="width: 65%"></div>
+                                    </div>
+                                    <span class="availability-text">65% Available</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="allocation-optimizer card">
+                            <h3>AI Allocation Optimizer</h3>
+                            <div class="optimization-results">
+                                <div class="optimization-item">
+                                    <h4>Recommended Deployment</h4>
+                                    <p>Deploy 8 medical teams from Delhi to Mumbai flood zone</p>
+                                    <div class="efficiency-gain">+34% efficiency</div>
+                                </div>
+                                <div class="optimization-item">
+                                    <h4>Supply Chain Alert</h4>
+                                    <p>Replenish medical supplies in Chennai within 24 hours</p>
+                                    <div class="efficiency-gain">Critical Priority</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="supply-tracking card">
+                            <h3>Supply Chain Tracking</h3>
+                            <div class="chart-container" style="position: relative; height: 250px;">
+                                <canvas id="supplyChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="personnel-deployment card">
+                            <h3>Personnel Deployment</h3>
+                            <div class="deployment-map">
+                                <div class="deployment-item">
+                                    <span class="location">Mumbai</span>
+                                    <span class="personnel">156 personnel</span>
+                                    <span class="status status--error">Critical</span>
+                                </div>
+                                <div class="deployment-item">
+                                    <span class="location">Delhi</span>
+                                    <span class="personnel">89 personnel</span>
+                                    <span class="status status--success">Normal</span>
+                                </div>
+                                <div class="deployment-item">
+                                    <span class="location">Chennai</span>
+                                    <span class="personnel">234 personnel</span>
+                                    <span class="status status--warning">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recovery AI Tab -->
+            <div class="tab-content" id="recovery">
+                <div class="recovery-container">
+                    <h2 class="section-title">AI-Powered Recovery Planning</h2>
+                    <div class="recovery-grid">
+                        <div class="damage-assessment card">
+                            <h3>Damage Assessment</h3>
+                            <div class="assessment-summary">
+                                <div class="damage-category">
+                                    <span class="category-name">Infrastructure</span>
+                                    <div class="damage-meter">
+                                        <div class="damage-fill severe" style="width: 65%"></div>
+                                    </div>
+                                    <span class="damage-percentage">65% Damaged</span>
+                                </div>
+                                <div class="damage-category">
+                                    <span class="category-name">Residential</span>
+                                    <div class="damage-meter">
+                                        <div class="damage-fill moderate" style="width: 40%"></div>
+                                    </div>
+                                    <span class="damage-percentage">40% Damaged</span>
+                                </div>
+                                <div class="damage-category">
+                                    <span class="category-name">Commercial</span>
+                                    <div class="damage-meter">
+                                        <div class="damage-fill minor" style="width: 25%"></div>
+                                    </div>
+                                    <span class="damage-percentage">25% Damaged</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recovery-planning card">
+                            <h3>Recovery Timeline</h3>
+                            <div class="timeline">
+                                <div class="timeline-item completed">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Emergency Response</h4>
+                                        <p>Immediate rescue and evacuation</p>
+                                        <span class="timeline-date">Days 1-3</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item active">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Relief Operations</h4>
+                                        <p>Shelter, food, medical aid</p>
+                                        <span class="timeline-date">Days 4-14</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Infrastructure Repair</h4>
+                                        <p>Roads, utilities, communications</p>
+                                        <span class="timeline-date">Days 15-60</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Long-term Recovery</h4>
+                                        <p>Housing, economic restoration</p>
+                                        <span class="timeline-date">Months 3-12</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resource-prioritization card">
+                            <h3>Resource Prioritization</h3>
+                            <div class="priority-list">
+                                <div class="priority-item high">
+                                    <span class="priority-level">🔴 Critical</span>
+                                    <span class="priority-task">Restore power grid in affected areas</span>
+                                    <span class="priority-timeline">24 hours</span>
+                                </div>
+                                <div class="priority-item medium">
+                                    <span class="priority-level">🟡 High</span>
+                                    <span class="priority-task">Repair main transportation routes</span>
+                                    <span class="priority-timeline">72 hours</span>
+                                </div>
+                                <div class="priority-item low">
+                                    <span class="priority-level">🟢 Medium</span>
+                                    <span class="priority-task">Establish temporary housing</span>
+                                    <span class="priority-timeline">1 week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-tracking card">
+                            <h3>Recovery Progress</h3>
+                            <div class="progress-metrics">
+                                <div class="progress-metric">
+                                    <span class="metric-label">Overall Recovery</span>
+                                    <div class="progress-bar large">
+                                        <div class="progress-fill" style="width: 45%"></div>
+                                    </div>
+                                    <span class="metric-value">45%</span>
+                                </div>
+                                <div class="progress-metric">
+                                    <span class="metric-label">Infrastructure</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 30%"></div>
+                                    </div>
+                                    <span class="metric-value">30%</span>
+                                </div>
+                                <div class="progress-metric">
+                                    <span class="metric-label">Relief Distribution</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 78%"></div>
+                                    </div>
+                                    <span class="metric-value">78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <div class="analytics-container">
+                    <h2 class="section-title">Analytics & Historical Data</h2>
+                    <div class="analytics-grid">
+                        <div class="disaster-trends card">
+                            <h3>Disaster Frequency Trends</h3>
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="trendsChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="performance-metrics card">
+                            <h3>System Performance</h3>
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-icon">⚡</div>
+                                    <div class="metric-data">
+                                        <span class="metric-number">3.2 min</span>
+                                        <span class="metric-desc">Avg Response Time</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-icon">🎯</div>
+                                    <div class="metric-data">
+                                        <span class="metric-number">94.5%</span>
+                                        <span class="metric-desc">Prediction Accuracy</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-icon">👥</div>
+                                    <div class="metric-data">
+                                        <span class="metric-number">98.7%</span>
+                                        <span class="metric-desc">Population Covered</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-icon">💰</div>
+                                    <div class="metric-data">
+                                        <span class="metric-number">₹2.3Cr</span>
+                                        <span class="metric-desc">Damage Prevented</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="regional-analysis card">
+                            <h3>Regional Risk Analysis</h3>
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="regionalChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="predictive-analytics card">
+                            <h3>Predictive Analytics</h3>
+                            <div class="prediction-summary">
+                                <div class="prediction-stat">
+                                    <h4>Next 30 Days</h4>
+                                    <p>High probability of monsoon flooding in Mumbai region</p>
+                                    <div class="confidence-level">Confidence: 87%</div>
+                                </div>
+                                <div class="prediction-stat">
+                                    <h4>Seasonal Outlook</h4>
+                                    <p>Above-normal cyclone activity expected in Bay of Bengal</p>
+                                    <div class="confidence-level">Confidence: 73%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
