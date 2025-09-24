@@ -481,6 +481,40 @@
                 <div class="recovery-container">
                     <h2 class="section-title">AI-Powered Recovery Planning</h2>
                     <div class="recovery-grid">
+                        <!-- Chat System -->
+                        <div class="chat-container card">
+                            <div class="chat-header">
+                                <h3>🤖 Recovery AI Assistant</h3>
+                                <div class="chat-status">
+                                    <span class="status status--success">Online</span>
+                                    <span class="chat-info">24/7 Support Available</span>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="chat-message bot">
+                                    <div class="message-avatar">🤖</div>
+                                    <div class="message-content">
+                                        <div class="message-text">Hello! I'm your Recovery AI Assistant. I can help you with disaster recovery planning, safety guidance, resource assistance, and more. How can I assist you today?</div>
+                                        <div class="message-time">Just now</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-quick-actions">
+                                <button class="quick-action-btn" data-message="I need safety precautions for flood recovery">🛡️ Safety Tips</button>
+                                <button class="quick-action-btn" data-message="How do I claim insurance for disaster damage?">💼 Insurance Help</button>
+                                <button class="quick-action-btn" data-message="Where can I find emergency shelter?">🏠 Find Shelter</button>
+                                <button class="quick-action-btn" data-message="I need medical assistance">🚑 Medical Help</button>
+                            </div>
+                            
+                            <div class="chat-input-container">
+                                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." maxlength="500">
+                                <button class="btn btn--primary chat-send" id="chatSend">
+                                    <span>Send</span>
+                                </button>
+                            </div>
+                        </div>
                         <div class="damage-assessment card">
                             <h3>Damage Assessment</h3>
                             <div class="assessment-summary">
