@@ -1211,6 +1211,96 @@ function initializeMapControls() {
     });
 }
 
+// Recovery AI Assistant Chat Logic
+function initializeRecoveryAIChat() {
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+
+    if (!chatMessages || !chatInput || !chatSend) return;
+
+    // Utility to add message to chat
+    function addChatMessage(content, sender = 'user') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${sender === 'bot' ? 'bot' : 'user'}`;
+        messageDiv.innerHTML = `
+            <div class="message-avatar">${sender === 'bot' ? '🤖' : '🧑'}</div>
+            <div class="message-content">
+                <div class="message-text">${content}</div>
+                <div class="message-time">${new Date().toLocaleTimeString()}</div>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Bot response logic
+    function getBotResponse(message) {
+        message = message.toLowerCase();
+        if (message.includes('safety') || message.includes('flood')) {
+            return `🛡️ Here are safety tips for flood recovery:
+<ul>
+<li>Stay away from floodwaters and damaged areas.</li>
+<li>Use clean water for drinking and cooking.</li>
+<li>Watch out for electrical hazards.</li>
+<li>Contact emergency services if needed.</li>
+</ul>`;
+        }
+        if (message.includes('insurance')) {
+            return `💼 To claim insurance for disaster damage:
+<ul>
+<li>Document all damages with photos.</li>
+<li>Contact your insurance provider.</li>
+<li>Fill out claim forms accurately.</li>
+<li>Keep receipts for repairs and expenses.</li>
+</ul>`;
+        }
+        if (message.includes('shelter')) {
+            return `🏠 Emergency shelters are available at local community centers, schools, and government buildings. Please contact your local authorities or visit the nearest shelter for assistance.`;
+        }
+        if (message.includes('medical')) {
+            return `🚑 For medical assistance, visit the nearest hospital or call emergency services. You can also use the hospital map in the dashboard for locations.`;
+        }
+        return `Thank you for your message. How can I assist you further with disaster recovery?`;
+    }
+
+    // Handle sending user message
+    function sendUserMessage() {
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        addChatMessage(msg, 'user');
+        chatInput.value = '';
+        setTimeout(() => {
+            addChatMessage(getBotResponse(msg), 'bot');
+        }, 800);
+    }
+
+    // Quick action buttons
+    quickActionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const msg = btn.getAttribute('data-message');
+            addChatMessage(msg, 'user');
+            setTimeout(() => {
+                addChatMessage(getBotResponse(msg), 'bot');
+            }, 800);
+        });
+    });
+
+    // Send button
+    chatSend.addEventListener('click', sendUserMessage);
+
+    // Enter key
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendUserMessage();
+        }
+    });
+}
+
+// Initialize Recovery AI Chat on DOM ready
+document.addEventListener('DOMContentLoaded', initializeRecoveryAIChat);
+
 // Initialize Application
 function initializeApp() {
     console.log('Initializing Disaster Management System...');
